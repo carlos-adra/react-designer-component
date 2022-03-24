@@ -99,6 +99,7 @@ class Designer extends React.Component<IDesignerProps, IDesignerState> {
       outlineColor: "rgba(0,0,0,1)",
       outlineWeight: 4,
       underline: false,
+      mode: "rectangle",
       useInternalItems: !props.items
     };
   }
@@ -134,60 +135,23 @@ class Designer extends React.Component<IDesignerProps, IDesignerState> {
     const { paperSize, className, fontApiKey, features } = this.props;
 
     return (
-      <div
-        style={{ width: paperSize!.width + 100 }}
-        className={classnames(classes.designer.wrapper, className)}
-      >
-        <ToolBox
-          classes={classes.designer.toolbox}
-          onAddImage={this.handleAddImage}
-          onAddCircle={this.handleAddCircle}
-          onAddRectangle={this.handleAddRectangle}
-          onAddLine={this.handleAddLine}
-          onAddText={this.handleAddText}
-          onAddBrush={this.handleAddBrush}
-          mode={mode}
-          features={{ ...defaultFeatures, ...features }}
-        />
-        <ToolOptions
-          classes={classes.designer.toolOptions}
-          fillColor={color}
-          outlineColor={outlineColor}
-          onChangeFillColor={this.handleChangeFillColor}
-          onChangeOutlineColor={this.handleChangeOutlineColor}
-          onChangeFont={this.handleChangeFont}
-          onChangeFontSize={this.handleChangeFontSize}
-          onChangeOutlineWeight={this.handleChangeOutlineWeight}
-          onToggleBold={this.handleChangeFontStyle("bold")}
-          onToggleUnderline={this.handleChangeFontStyle("underline")}
-          onToggleItalic={this.handleChangeFontStyle("italic")}
-          fontApiKey={fontApiKey!}
-          font={font}
-          fontSize={fontSize}
-          outlineWeight={outlineWeight}
-          bold={bold}
-          italic={italic}
-          underline={underline}
-          mode={mode ? mode : selectedItem ? selectedItem.type : undefined}
-        />
-        <Paper
-          classes={classes.designer.paper}
-          height={paperSize!.height}
-          width={paperSize!.width}
-          items={items}
-          area={area}
-          selectedItem={selectedItem}
-          onChangeItem={this.handleChangeItem}
-          onRemoveItem={this.handleRemoveItem}
-          onMouseDown={this.handleMouseDown}
-          onMouseMove={this.handleMouseMove}
-          onMouseUp={this.handleMouseUp}
-          onSelectItem={this.handleSelectItem}
-          onChangeTarget={this.handleChangeTarget}
-          cursor={mode || updatingItem ? "move" : undefined}
-          target={target}
-        />
-      </div>
+      <Paper
+        classes={classes.designer.paper}
+        height={paperSize!.height}
+        width={paperSize!.width}
+        items={items}
+        area={area}
+        selectedItem={selectedItem}
+        onChangeItem={this.handleChangeItem}
+        onRemoveItem={this.handleRemoveItem}
+        onMouseDown={this.handleMouseDown}
+        onMouseMove={this.handleMouseMove}
+        onMouseUp={this.handleMouseUp}
+        onSelectItem={this.handleSelectItem}
+        onChangeTarget={this.handleChangeTarget}
+        cursor={mode || updatingItem ? "move" : undefined}
+        target={target}
+      />
     );
   }
 
